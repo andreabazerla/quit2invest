@@ -1,13 +1,5 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
-
-const inter = Inter({ subsets: ["latin"] });
-
-export const metadata: Metadata = {
-  title: "Quit2Invest",
-  description: "Quit smoking to start to invest. It's your future!",
-};
+import "./globals.scss";
+import 'react-datepicker/dist/react-datepicker.css';
 
 export default function RootLayout({
   children,
@@ -16,7 +8,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="it">
-      <body className={inter.className}>{children}</body>
+      <body>{children}</body>
     </html>
   );
 }
