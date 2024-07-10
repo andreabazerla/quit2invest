@@ -1,16 +1,16 @@
 import React from 'react'
-import { Button, Col, Form, Row } from 'react-bootstrap';
+import { Button, Col, Form, InputGroup, Row } from 'react-bootstrap';
 
 interface Step1Props {
     prevStep: () => void;
     nextStep: () => void;
     handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     values: {
-        cigarettesPerDay: number;
+        packPrice: number;
     };
 }
 
-const SmokerCigarettesPerDay: React.FC<Step1Props> = ({ prevStep, nextStep, handleChange, values }) => {
+const SmokerPackPrice: React.FC<Step1Props> = ({ prevStep, nextStep, handleChange, values }) => {
 
     return (
         <>
@@ -18,14 +18,16 @@ const SmokerCigarettesPerDay: React.FC<Step1Props> = ({ prevStep, nextStep, hand
                 <Col sm={8} md={6} lg={4}>
                     <Row>
                         <Col>
-                            <Form.Label>Quante sigarette fumi al giorno?</Form.Label>
-                            <Form.Control 
-                                type="number" 
-                                placeholder='12'
-                                value={values.cigarettesPerDay}
-                                onChange={handleChange}
-                                name="cigarettesPerDay"
-                            />
+                            <Form.Label>Quale è il prezzo del pacchetto di sigarette che fumi?</Form.Label>
+                            <InputGroup>
+                                <InputGroup.Text>€</InputGroup.Text>
+                                <Form.Control 
+                                    type="number"
+                                    value={values.packPrice}
+                                    onChange={handleChange}
+                                    name="packPrice"
+                                />
+                            </InputGroup>
                         </Col>
                     </Row>
                     <br />
@@ -47,4 +49,4 @@ const SmokerCigarettesPerDay: React.FC<Step1Props> = ({ prevStep, nextStep, hand
     )
 }
 
-export default SmokerCigarettesPerDay
+export default SmokerPackPrice

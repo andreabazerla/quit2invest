@@ -1,6 +1,6 @@
 export default interface SmokerData {
     startDate: Date
-    cigarettePerDay: number
-    cigarettePerPack: number
+    cigarettesPerDay: number
+    cigarettesPerPack: number
     pricePack: number
 }
