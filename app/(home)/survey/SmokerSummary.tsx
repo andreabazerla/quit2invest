@@ -23,7 +23,8 @@ const SmokerSummary: React.FC<Step1Props> = ({ prevStep, nextStep, values }) => 
     var today = new Date();
     var diff = Math.abs(today.getTime() - new Date(values.startDate).getTime());
     var diffDays = Math.ceil(diff / (1000 * 3600 * 24)); 
-    const cost = Math.max((diffDays+1) * values.cigarettesPerDay / values.cigarettesPerPack * values.packPrice, values.packPrice)
+    let cost = Math.max((diffDays+1) * values.cigarettesPerDay / values.cigarettesPerPack * values.packPrice, values.packPrice);
+    cost = Math.round(cost * 100) / 100;
 
     return (
         <>
