@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Button, Col, Row } from "react-bootstrap";
 
 export default function Home() {
@@ -13,7 +14,9 @@ export default function Home() {
             <br></br>
             <Row>
                 <Col className='text-center'>
-                    <Button href='survey' variant='primary'>Calcola</Button>
+                  <Link href='survey'>
+                      <Button variant='primary'>Calcola</Button>
+                  </Link>
                 </Col>
             </Row>
         </Col>
