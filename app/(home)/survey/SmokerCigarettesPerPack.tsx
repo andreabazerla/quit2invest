@@ -24,7 +24,7 @@ const SmokerCigarettesPerPack: React.FC<Step1Props> = ({ prevStep, nextStep, han
                                 placeholder='20'
                                 value={values.cigarettesPerPack}
                                 onChange={handleChange}
-                                name="cigarettePerPack"
+                                name="cigarettesPerPack"
                             />
                         </Col>
                     </Row>
