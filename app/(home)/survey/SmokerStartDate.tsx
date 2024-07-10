@@ -14,7 +14,7 @@ const SmokerStartDate: React.FC<Step1Props> = ({ nextStep, handleChange, values 
     return (
         <>
             <Row className='justify-content-center'>
-                <Col xs={4}>
+                <Col sm={8} md={6} lg={4}>
                     <Row>
                         <Col>
                             <Form.Label>Quando hai iniziato a fumare?</Form.Label>
@@ -23,11 +23,7 @@ const SmokerStartDate: React.FC<Step1Props> = ({ nextStep, handleChange, values 
                     </Row>
                     <br />
                     <Row>
-                        <Col className='text-center'>
-                            <Button variant="secondary" onClick={nextStep}>
-                                Indietro
-                            </Button>
-                        </Col>
+                        <Col></Col>
                         <Col className='text-center'>
                             <Button variant="primary" onClick={nextStep}>
                                 Continua
