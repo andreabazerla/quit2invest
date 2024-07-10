@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <>
       <Row className="justify-content-center">
-        <Col xs={4}>
+        <Col sm={8} md={6} lg={4}>
             <Row>
                 <Col>
                     <p>Fai un test per capire quanto avresti potuto guadagnare se al posto di fumare avessi investito nel tuo futuro</p>
