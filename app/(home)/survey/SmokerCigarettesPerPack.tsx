@@ -20,7 +20,8 @@ const SmokerCigarettesPerPack: React.FC<Step1Props> = ({ prevStep, nextStep, han
                         <Col>
                             <Form.Label>Quante sigarette ci sono in ogni pacchetto?</Form.Label>
                             <Form.Control
-                                type="number" 
+                                type="number"
+                                placeholder='20'
                                 value={values.cigarettesPerPack}
                                 onChange={handleChange}
                                 name="cigarettePerPack"
