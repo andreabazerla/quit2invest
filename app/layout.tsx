@@ -1,5 +1,11 @@
 import "./globals.scss";
-import 'react-datepicker/dist/react-datepicker.css';
+
+import { Container } from "react-bootstrap";
+
+export const metadata = {
+  title: 'Quit2Invest',
+  description: 'Quit smoking and start to invest!',
+};
 
 export default function RootLayout({
   children,
@@ -7,8 +13,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="it">
-      <body>{children}</body>
+    <html lang="en">
+      <body>
+        <Container className="d-flex vh-100 flex-column">
+          {children}
+        </Container>
+      </body>
     </html>
   );
 }
