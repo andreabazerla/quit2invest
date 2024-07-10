@@ -40,7 +40,7 @@ const SmokerSummary: React.FC<Step1Props> = ({ prevStep, nextStep, values }) => 
                             <p>Prezzo di un singolo pacchetto di sigarette: €{values.packPrice}</p>
                             <br></br>
                             <p>
-                                <b>Totale soldi spesi: €{cost}</b>
+                                <b>Totale soldi spesi: €{cost.toFixed(2)}</b>
                             </p>
                         </Col>
                     </Row>
