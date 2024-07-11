@@ -83,7 +83,7 @@ const SmokerSurvey: React.FC<Step1Props> = ({ nextStep, handleChange, values }) 
                         </Col>
                         <Col className='text-center'>
                             <Button variant="primary" onClick={nextStep}>
-                                Continua
+                                Calcola
                             </Button>
                         </Col>
                     </Row>

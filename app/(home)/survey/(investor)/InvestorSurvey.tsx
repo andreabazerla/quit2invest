@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import React from 'react'
 import { Button, Col, Form, InputGroup, Row, Tab, Tabs } from 'react-bootstrap';
-import { numberWithCommas } from './SmokerCost';
+import { numberWithCommas } from '../(smoker)/SmokerCost';
 
 interface Step1Props {
     prevStep: () => void;
@@ -113,7 +113,7 @@ const InvestorSurvey: React.FC<Step1Props> = ({ prevStep, nextStep, handleChange
                         </Col>
                         <Col className='text-center'>
                             <Button variant="primary" onClick={nextStep}>
-                                Continua
+                                Simula
                             </Button>
                         </Col>
                     </Row>

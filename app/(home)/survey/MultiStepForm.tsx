@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import SmokerSummary from './(smoker)/SmokerCost';
 import SmokerSurvey from './(smoker)/SmokerSurvey';
-import InvestorSurvey from './(smoker)/InvestorSurvey';
+import InvestorSurvey from './(investor)/InvestorSurvey';
+import InvestorSimulation from './(investor)/InvestorSimulation';
 
 const MultistepForm: React.FC = () => {
   const [step, setStep] = useState(1);
@@ -11,6 +12,7 @@ const MultistepForm: React.FC = () => {
     cigarettesPerPack: 20,
     packPrice: 5.00,
     monthlyRate: 0,
+    totalCost: 0,
     variableRate: 1.50,
     fixedRate: 0,
     ter: 0.12,
@@ -52,6 +54,8 @@ const MultistepForm: React.FC = () => {
       return <SmokerSummary prevStep={prevStep} nextStep={nextStep} values={formValues} />;
     case 3:
       return <InvestorSurvey prevStep={prevStep} nextStep={nextStep} handleChange={handleChange} values={formValues} />;
+    case 4:
+      return <InvestorSimulation prevStep={prevStep} nextStep={nextStep} values={formValues} />;
     default:
       return <div />;
   }
