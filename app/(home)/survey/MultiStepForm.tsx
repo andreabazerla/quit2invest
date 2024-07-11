@@ -1,16 +1,34 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import SmokerSummary from './(smoker)/SmokerCost';
 import SmokerSurvey from './(smoker)/SmokerSurvey';
-import Home from '../page';
+import InvestorSurvey from './(smoker)/InvestorSurvey';
 
 const MultistepForm: React.FC = () => {
   const [step, setStep] = useState(1);
   const [formValues, setFormValues] = useState({
-    startDate: '',
+    startDate: new Date().toLocaleDateString('en-US'),
     cigarettesPerDay: 12,
     cigarettesPerPack: 20,
-    packPrice: 5.00
+    packPrice: 5.00,
+    monthlyRate: 0,
+    variableRate: 1.50,
+    fixedRate: 0,
+    ter: 0.12,
+    annualReturn: 4.50
   });
+
+  useEffect(() => {
+    const today = new Date();
+    const lastYear = new Date(today.getFullYear() - 1, today.getMonth(), today.getDate());
+
+    const formattedDate = lastYear.toISOString().split('T')[0];
+    console.log(formattedDate)
+
+    setFormValues(prevState => ({
+      ...prevState,
+      startDate: formattedDate,
+    }));
+  }, []);
 
   const nextStep = () => {
     setStep(step + 1);
@@ -32,6 +50,8 @@ const MultistepForm: React.FC = () => {
       return <SmokerSurvey nextStep={nextStep} handleChange={handleChange} values={formValues} />
     case 2:
       return <SmokerSummary prevStep={prevStep} nextStep={nextStep} values={formValues} />;
+    case 3:
+      return <InvestorSurvey prevStep={prevStep} nextStep={nextStep} handleChange={handleChange} values={formValues} />;
     default:
       return <div />;
   }
