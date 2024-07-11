@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-import SmokerStartDate from './SmokerStartDate';
-import SmokerCigarettesPerDay from './SmokerCigarettesPerDay';
-import SmokerCigarettesPerPack from './SmokerCigarettesPerPack';
-import SmokerPackPrice from './SmokerPackPrice';
-import SmokerSummary from './SmokerSummary';
+import SmokerSummary from './(smoker)/SmokerCost';
+import SmokerSurvey from './(smoker)/SmokerSurvey';
+import Home from '../page';
 
 const MultistepForm: React.FC = () => {
   const [step, setStep] = useState(1);
@@ -31,14 +29,8 @@ const MultistepForm: React.FC = () => {
 
   switch (step) {
     case 1:
-      return <SmokerStartDate nextStep={nextStep} handleChange={handleChange} values={formValues} />;
+      return <SmokerSurvey nextStep={nextStep} handleChange={handleChange} values={formValues} />
     case 2:
-      return <SmokerCigarettesPerDay prevStep={prevStep} nextStep={nextStep} handleChange={handleChange} values={formValues} />;
-    case 3:
-      return <SmokerCigarettesPerPack prevStep={prevStep} nextStep={nextStep} handleChange={handleChange} values={formValues} />;
-    case 4:
-      return <SmokerPackPrice prevStep={prevStep} nextStep={nextStep} handleChange={handleChange} values={formValues} />;
-    case 5:
       return <SmokerSummary prevStep={prevStep} nextStep={nextStep} values={formValues} />;
     default:
       return <div />;

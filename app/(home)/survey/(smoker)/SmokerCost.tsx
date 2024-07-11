@@ -23,7 +23,7 @@ const SmokerSummary: React.FC<Step1Props> = ({ prevStep, nextStep, values }) => 
     var today = new Date();
     var diff = Math.abs(today.getTime() - new Date(values.startDate).getTime());
     var diffDays = Math.ceil(diff / (1000 * 3600 * 24)); 
-    let cost = Math.max((diffDays+1) * values.cigarettesPerDay / values.cigarettesPerPack * values.packPrice, values.packPrice);
+    let cost = Math.max(diffDays * values.cigarettesPerDay / values.cigarettesPerPack * values.packPrice, values.packPrice);
     cost = Math.round(cost * 100) / 100;
 
     return (
@@ -32,16 +32,11 @@ const SmokerSummary: React.FC<Step1Props> = ({ prevStep, nextStep, values }) => 
                 <Col sm={8} md={6} lg={4}>
                     <Row>
                         <Col>
-                            <h5>Riassunto:</h5>
+                            <h4>Spese calcolate:</h4>
                             <br></br>
-                            <p>Data della prima sigaretta fumata: {startDateFormatted}</p>
-                            <p>Numero di sigarette fumate al giorno: {values.cigarettesPerDay}</p>
-                            <p>Quantità di sigarette presenti in un pacchetto: {values.cigarettesPerPack}</p>
-                            <p>Prezzo di un singolo pacchetto di sigarette: €{values.packPrice}</p>
-                            <br></br>
-                            <p>
-                                <b>Totale soldi spesi: €{cost.toFixed(2)}</b>
-                            </p>
+                            <p><b>Totale soldi spesi: €{numberWithCommas(cost.toFixed(2))}</b></p>
+                            <p>Soldi spesi all&apos;anno: €{numberWithCommas(Math.min((cost / (diffDays/365)), cost).toFixed(2))}</p>
+                            <p>Soldi spesi al mese: €{numberWithCommas(Math.min(((cost / (diffDays/365)/12)), cost).toFixed(2))}</p>
                         </Col>
                     </Row>
                     <br />
@@ -61,6 +56,10 @@ const SmokerSummary: React.FC<Step1Props> = ({ prevStep, nextStep, values }) => 
             </Row>
         </>
     )
+}
+
+const numberWithCommas = (x: string) => {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
 export default SmokerSummary
