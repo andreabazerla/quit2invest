@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import SmokerSummary from './(smoker)/SmokerCost';
-import SmokerSurvey from './(smoker)/SmokerSurvey';
+import SmokerSurvey, { SmokerType } from './(smoker)/SmokerSurvey';
 import InvestorSurvey from './(investor)/InvestorSurvey';
 import InvestorSimulation from './(investor)/InvestorSimulation';
 
@@ -9,6 +9,7 @@ const MultistepForm: React.FC = () => {
   const [formValues, setFormValues] = useState({
     startDate: new Date().toLocaleDateString('en-US'),
     cigarettesPerDay: 12,
+    smokerType: SmokerType.sigarette,
     cigarettesPerPack: 20,
     packPrice: 5.00,
     monthlyRate: 0,
@@ -24,7 +25,6 @@ const MultistepForm: React.FC = () => {
     const lastYear = new Date(today.getFullYear() - 1, today.getMonth(), today.getDate());
 
     const formattedDate = lastYear.toISOString().split('T')[0];
-    console.log(formattedDate)
 
     setFormValues(prevState => ({
       ...prevState,
@@ -45,6 +45,8 @@ const MultistepForm: React.FC = () => {
       ...formValues,
       [e.target.name]: e.target.value,
     });
+
+    console.log(e.target.name, e.target.value)
   };
 
   switch (step) {

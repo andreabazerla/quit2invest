@@ -8,16 +8,22 @@ interface Step1Props {
     values: {
         startDate: string
         cigarettesPerDay: number
+        smokerType: SmokerType
         cigarettesPerPack: number
         packPrice: number
     };
+}
+
+export enum SmokerType {
+    sigarette = 'sigarette', 
+    trinciato = 'trinciato'
 }
 
 const SmokerSurvey: React.FC<Step1Props> = ({ nextStep, handleChange, values }) => {
 
     return (
         <>
-            <Row className='justify-content-center'>
+            <Row>
                 <Col sm={8} md={6} lg={4}>
                     <Row>
                         <Col>
@@ -45,32 +51,56 @@ const SmokerSurvey: React.FC<Step1Props> = ({ nextStep, handleChange, values }) 
                         </Col>
                     </Row>
                     <br></br>
+
                     <Row>
+                        <Form.Label>Cosa fumi di solito?</Form.Label>
                         <Col>
-                            <Form.Label>Quante sigarette ci sono in ogni pacchetto?</Form.Label>
-                            <Form.Control
-                                type="number"
-                                value={values.cigarettesPerPack}
+                            <Form.Check
+                                inline
+                                value={SmokerType.sigarette}
+                                label="Sigarette"
+                                name="smokerTypeRadioButton"
+                                type='radio'
                                 onChange={handleChange}
-                                name="cigarettesPerPack"
+                            />
+                            <Form.Check
+                                inline
+                                value={SmokerType.trinciato}
+                                label="Trinciato"
+                                name="smokerTypeRadioButton"
+                                type='radio'
+                                onChange={handleChange}
                             />
                         </Col>
                     </Row>
+                    {values.smokerType}
                     <br></br>
-                    <Row>
-                        <Col>
-                            <Form.Label>Quale è il prezzo del pacchetto di sigarette che fumi?</Form.Label>
-                            <InputGroup>
-                                <InputGroup.Text>€</InputGroup.Text>
-                                <Form.Control 
-                                    type="number"
-                                    value={values.packPrice}
-                                    onChange={handleChange}
-                                    name="packPrice"
-                                />
-                            </InputGroup>
-                        </Col>
-                    </Row>
+                    {values.smokerType === SmokerType.sigarette && (
+                        <>
+                            <Row>
+                                <Col>
+                                    <Form.Label>Quante sigarette ci sono in ogni pacchetto?</Form.Label>
+                                    <Form.Control
+                                        type="number"
+                                        value={values.cigarettesPerPack}
+                                        onChange={handleChange}
+                                        name="cigarettesPerPack" />
+                                </Col>
+                            </Row><br></br><Row>
+                                <Col>
+                                    <Form.Label>Quale è il prezzo del pacchetto di sigarette che fumi?</Form.Label>
+                                    <InputGroup>
+                                        <InputGroup.Text>€</InputGroup.Text>
+                                        <Form.Control
+                                            type="number"
+                                            value={values.packPrice}
+                                            onChange={handleChange}
+                                            name="packPrice" />
+                                    </InputGroup>
+                                </Col>
+                            </Row>
+                        </>
+                    )}
                     <br></br>
                     <br></br>
                     <Row>

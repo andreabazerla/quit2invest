@@ -4,7 +4,7 @@ import { Button, Col, Row } from "react-bootstrap";
 export default function Home() {
   return (
     <>
-      <Row className="justify-content-center">
+      <Row>
         <Col sm={8} md={6} lg={4}>
             <Row>
                 <Col>

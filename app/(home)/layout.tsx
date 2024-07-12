@@ -6,11 +6,9 @@ export default function Home({ children }: { children: React.ReactNode }) {
     return (
         <>
             <Header />
-                <Row className="align-items-center vh-100">
-                    <Col>
-                        {children}
-                    </Col>
-                </Row>
+                <div>
+                    {children}
+                </div>
             <Footer />
         </>
     );

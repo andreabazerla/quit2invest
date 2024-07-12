@@ -24,7 +24,7 @@ const InvestorSurvey: React.FC<Step1Props> = ({ prevStep, nextStep, handleChange
 
     return (
         <>
-            <Row className='justify-content-center'>
+            <Row>
                 <Col sm={8} md={6} lg={4}>
                     <Row>
                         <Col>
