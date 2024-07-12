@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Button, Col, Row } from 'react-bootstrap';
+import { SmokerType } from './SmokerSurvey';
 
 interface Step1Props {
     prevStep: () => void;
@@ -8,7 +9,14 @@ interface Step1Props {
         startDate: string,
         cigarettesPerDay: number,
         cigarettesPerPack: number,
+        smokerType: SmokerType,
         packPrice: number,
+        filtersPackQuantity: number,
+        filtersPackPrice: number,
+        papersPackQuantity: number,
+        papersPackPrice: number,
+        tobaccoPackDuration: number,
+        tobaccoPackPrice: number,
         monthlyRate: number,
         totalCost: number
     };
@@ -21,8 +29,20 @@ const SmokerSummary: React.FC<Step1Props> = ({ prevStep, nextStep, values }) => 
     const diffDays = Math.ceil(diff / (1000 * 3600 * 24)); 
     
     const cigarettesSmoked = (diffDays+1) * values.cigarettesPerDay; 
-    const packsBought = Math.ceil(cigarettesSmoked / values.cigarettesPerPack);
-    const cost = Math.round(Math.max(packsBought * values.packPrice, values.packPrice) * 100) / 100;
+    let cost = 0;
+    if (values.smokerType === SmokerType.sigarette) {
+        const packsBought = Math.ceil(cigarettesSmoked / values.cigarettesPerPack);
+        cost = Math.round(Math.max(packsBought * values.packPrice, values.packPrice) * 100) / 100;
+    } else {
+        const filtersPackQuantity = Math.ceil(cigarettesSmoked / values.filtersPackQuantity);
+        const filtersPackCost = Math.round(Math.max(filtersPackQuantity * values.filtersPackPrice, values.filtersPackPrice) * 100) / 100;
+        const papersPackQuantity = Math.ceil(cigarettesSmoked / values.papersPackQuantity);
+        const papersPackCost = Math.round(Math.max(papersPackQuantity * values.papersPackPrice, values.papersPackPrice) * 100) / 100;
+        const tobaccoPackQuantity = Math.max(Math.ceil(diffDays / values.tobaccoPackDuration), 1);
+        const tobaccoPackCost = Math.round(Math.max(tobaccoPackQuantity * values.tobaccoPackPrice, values.tobaccoPackPrice) * 100) / 100;
+        cost = Math.round(Math.max(filtersPackCost + papersPackCost + tobaccoPackCost) * 100) / 100;
+    }
+    
     const annualCost = cost / (diffDays/365);
     const monthlyCost = Math.min((cost / (diffDays/365))/12, cost);
 

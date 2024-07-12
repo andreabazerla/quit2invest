@@ -11,6 +11,12 @@ interface Step1Props {
         smokerType: SmokerType
         cigarettesPerPack: number
         packPrice: number
+        filtersPackQuantity: number
+        filtersPackPrice: number
+        papersPackQuantity: number
+        papersPackPrice: number
+        tobaccoPackDuration: number
+        tobaccoPackPrice: number
     };
 }
 
@@ -59,48 +65,134 @@ const SmokerSurvey: React.FC<Step1Props> = ({ nextStep, handleChange, values }) 
                                 inline
                                 value={SmokerType.sigarette}
                                 label="Sigarette"
-                                name="smokerTypeRadioButton"
+                                name="smokerType"
                                 type='radio'
                                 onChange={handleChange}
+                                checked={values.smokerType == SmokerType.sigarette}
                             />
                             <Form.Check
                                 inline
                                 value={SmokerType.trinciato}
                                 label="Trinciato"
-                                name="smokerTypeRadioButton"
+                                name="smokerType"
                                 type='radio'
                                 onChange={handleChange}
+                                checked={values.smokerType == SmokerType.trinciato}
                             />
                         </Col>
                     </Row>
-                    {values.smokerType}
                     <br></br>
-                    {values.smokerType === SmokerType.sigarette && (
-                        <>
-                            <Row>
-                                <Col>
-                                    <Form.Label>Quante sigarette ci sono in ogni pacchetto?</Form.Label>
-                                    <Form.Control
-                                        type="number"
-                                        value={values.cigarettesPerPack}
-                                        onChange={handleChange}
-                                        name="cigarettesPerPack" />
-                                </Col>
-                            </Row><br></br><Row>
-                                <Col>
-                                    <Form.Label>Quale è il prezzo del pacchetto di sigarette che fumi?</Form.Label>
-                                    <InputGroup>
-                                        <InputGroup.Text>€</InputGroup.Text>
+                    {values.smokerType === SmokerType.sigarette
+                        ? (
+                            <>
+                                <Row>
+                                    <Col>
+                                        <Form.Label>Quante sigarette ci sono in ogni pacchetto?</Form.Label>
                                         <Form.Control
                                             type="number"
-                                            value={values.packPrice}
+                                            value={values.cigarettesPerPack}
                                             onChange={handleChange}
-                                            name="packPrice" />
-                                    </InputGroup>
-                                </Col>
-                            </Row>
-                        </>
-                    )}
+                                            name="cigarettesPerPack" />
+                                    </Col>
+                                </Row>
+                                <br></br>
+                                <Row>
+                                    <Col>
+                                        <Form.Label>Quale è il prezzo del pacchetto di sigarette che fumi?</Form.Label>
+                                        <InputGroup>
+                                            <InputGroup.Text>€</InputGroup.Text>
+                                            <Form.Control
+                                                type="number"
+                                                value={values.packPrice}
+                                                onChange={handleChange}
+                                                name="packPrice" />
+                                        </InputGroup>
+                                    </Col>
+                                </Row>
+                            </>
+                        )
+                        : (
+                            <>
+                                <Row>
+                                    <Col>
+                                        <Form.Label>Quanti filtrini sono contenuti nei pacchetti che compri?</Form.Label>
+                                        <Form.Control 
+                                            type="number" 
+                                            value={values.filtersPackQuantity}
+                                            onChange={handleChange}
+                                            name="filtersPackQuantity"
+                                        />
+                                    </Col>
+                                </Row>
+                                <br></br>
+                                <Row>
+                                    <Col>
+                                        <Form.Label>Quanto costa un pacchetto di filtrini?</Form.Label>
+                                        <InputGroup>
+                                            <InputGroup.Text>€</InputGroup.Text>
+                                            <Form.Control
+                                                type="number"
+                                                value={values.filtersPackPrice}
+                                                onChange={handleChange}
+                                                name="filtersPackPrice" />
+                                        </InputGroup>
+                                    </Col>
+                                </Row>
+                                <br></br>
+                                <Row>
+                                    <Col>
+                                        <Form.Label>Quante cartine sono contenute nei pacchetti?</Form.Label>
+                                        <Form.Control 
+                                            type="number" 
+                                            value={values.papersPackQuantity}
+                                            onChange={handleChange}
+                                            name="papersPackQuantity"
+                                        />
+                                    </Col>
+                                </Row>
+                                <br></br>
+                                <Row>
+                                    <Col>
+                                        <Form.Label>Quanto costa un pacchetto di cartine?</Form.Label>
+                                        <InputGroup>
+                                            <InputGroup.Text>€</InputGroup.Text>
+                                            <Form.Control
+                                                type="number"
+                                                value={values.papersPackPrice}
+                                                onChange={handleChange}
+                                                name="papersPackPrice" />
+                                        </InputGroup>
+                                    </Col>
+                                </Row>
+                                <br></br>
+                                <Row>
+                                    <Col>
+                                        <Form.Label>Ogni quanti giorni compri un pacchetto di tabacco?</Form.Label>
+                                        <Form.Control 
+                                            type="number" 
+                                            value={values.tobaccoPackDuration}
+                                            onChange={handleChange}
+                                            name="tobaccoPackDuration"
+                                        />
+                                    </Col>
+                                </Row>
+                                <br></br>
+                                <Row>
+                                    <Col>
+                                        <Form.Label>Quanto costa un pacchetto di tabacco?</Form.Label>
+                                        <InputGroup>
+                                            <InputGroup.Text>€</InputGroup.Text>
+                                            <Form.Control
+                                                type="number"
+                                                value={values.tobaccoPackPrice}
+                                                onChange={handleChange}
+                                                name="tobaccoPackPrice" />
+                                        </InputGroup>
+                                    </Col>
+                                </Row>
+                            </>
+                        )
+                    }
                     <br></br>
                     <br></br>
                     <Row>
