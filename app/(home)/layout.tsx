@@ -6,9 +6,7 @@ export default function Home({ children }: { children: React.ReactNode }) {
     return (
         <>
             <Header />
-                <div>
-                    {children}
-                </div>
+                {children}
             <Footer />
         </>
     );

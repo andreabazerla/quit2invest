@@ -15,7 +15,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body suppressHydrationWarning={true}>
-        <Container>
+        <Container fluid>
           {children}
         </Container>
       </body>

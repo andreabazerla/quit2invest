@@ -66,7 +66,7 @@ const MultistepForm: React.FC = () => {
     case 4:
       return <InvestorSimulation prevStep={prevStep} nextStep={nextStep} values={formValues} />;
     default:
-      return <div />;
+      return <></>;
   }
 };
 

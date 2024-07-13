@@ -29,8 +29,8 @@ const SmokerSurvey: React.FC<Step1Props> = ({ nextStep, handleChange, values }) 
 
     return (
         <>
-            <Row>
-                <Col sm={8} md={6} lg={4}>
+            <Row className='justify-content-center'>
+                <Col sm={8} md={8} lg={6} xl={4} xxl={3}>
                     <Row>
                         <Col>
                             <h4>Inserisci i dati:</h4>
@@ -209,6 +209,9 @@ const SmokerSurvey: React.FC<Step1Props> = ({ nextStep, handleChange, values }) 
                             </Button>
                         </Col>
                     </Row>
+                    <br></br>
+                    <br></br>
+                    <br></br>
                 </Col>
             </Row>
         </>
