@@ -1,23 +1,53 @@
 import React, { useState } from 'react'
 import { Button, Col, Row } from 'react-bootstrap';
 import { numberWithCommas } from '../(smoker)/SmokerCost';
+import { PacType } from './InvestorSurvey';
 
 interface Step1Props {
     prevStep: () => void;
     nextStep: () => void;
     values: {
-        startDate: string,
-        cigarettesPerDay: number,
-        cigarettesPerPack: number,
-        packPrice: number,
-        monthlyRate: number,
+        startDate: string
+        cigarettesPerDay: number
+        cigarettesPerPack: number
+        packPrice: number
         totalCost: number
+        monthlyCost: number
+        pacType: PacType
+        variableRate: number
+        fixedRate: number
+        TER: number
+        annualReturn: number
     };
 }
 
 const InvestorSimulation: React.FC<Step1Props> = ({ prevStep, nextStep, values }) => {
 
-    const diffMonths = getMonthsDifference(new Date(values.startDate), new Date())
+    const depositQuantity = getMonthsDifference(new Date(values.startDate), new Date());
+    const annualReturn = values.annualReturn; 
+    const fixedRate = values.fixedRate;
+    const TER = values.TER; 
+    const variableRate = values.variableRate;
+    const monthlyCost = parseFloat(values.monthlyCost.toFixed(2));
+    const totalCost = monthlyCost*depositQuantity;
+
+    const annualIncome = (annualReturn - TER) / 100;
+    const menthlyReturn = annualIncome / 12;
+
+    let capital = 0;
+    let fundCost = 0;
+    for (let i = 0; i < depositQuantity; i++) {
+        capital += monthlyCost - fixedRate; 
+        capital -= monthlyCost * variableRate / 100;
+        let currentCapital = capital;
+        currentCapital *= (1 + (annualReturn / 100) / 12);
+        fundCost += currentCapital * (TER / 100) / 12;
+        capital *= (1 + menthlyReturn);
+    }
+
+    const pacCost = (monthlyCost / 100 * variableRate) * depositQuantity + fixedRate * depositQuantity;
+    
+    const investmentYears = Math.ceil(depositQuantity/12*10)/10;
 
     return (
         <>
@@ -27,12 +57,13 @@ const InvestorSimulation: React.FC<Step1Props> = ({ prevStep, nextStep, values }
                         <Col>
                             <h4>Risultato simulazione PAC in ETF:</h4>
                             <br></br>
-                            <p>Risparmio mensile investito: €{numberWithCommas(values.monthlyRate.toFixed(2))}</p>
-                            <p>Importo totale investito: €{numberWithCommas(values.totalCost.toFixed(2))}</p>
-                            <p>Orizzonte investimento in mesi: {diffMonths} (~{Math.round(diffMonths/12*10)/10} anno/i)</p>
-                            <p>Costi del PAC: €{numberWithCommas('0')}</p>
-                            <p>Costo del fondo: €{numberWithCommas('0')}</p>
-                            <p><b>Risultato (al netto dei costi): €{numberWithCommas('0')}</b></p>
+                            <p>Importo mensile investito: €{numberWithCommas(monthlyCost.toFixed(2))}</p>
+                            <p>Importo totale investito: €{numberWithCommas(totalCost.toString())}</p>
+                            <p className='text-green-600'>Incremento di valore: €{numberWithCommas((capital-totalCost+pacCost+fundCost).toFixed(2))}</p>
+                            <p>Orizzonte investimento: {depositQuantity} mes{depositQuantity>1 ? <>i</> : <>e</>} (~{investmentYears} ann{investmentYears>1 ? <>i</> : <>o</>})</p>
+                            <p className='text-red-600'>Costi del PAC: €{numberWithCommas(pacCost.toFixed(2))}</p>
+                            <p className='text-red-600'>Costo del fondo: €{numberWithCommas(fundCost.toFixed(2))}</p>
+                            <p><b>Risultato (al netto dei costi): €{numberWithCommas(capital.toFixed(2))}</b></p>
                         </Col>
                     </Row>
                     <br />

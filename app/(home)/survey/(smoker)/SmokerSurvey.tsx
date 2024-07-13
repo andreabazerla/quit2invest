@@ -21,8 +21,8 @@ interface Step1Props {
 }
 
 export enum SmokerType {
-    sigarette = 'sigarette', 
-    trinciato = 'trinciato'
+    SIGARETTE = 'sigarette', 
+    TRINCIATO = 'trinciato'
 }
 
 const SmokerSurvey: React.FC<Step1Props> = ({ nextStep, handleChange, values }) => {
@@ -63,26 +63,26 @@ const SmokerSurvey: React.FC<Step1Props> = ({ nextStep, handleChange, values }) 
                         <Col>
                             <Form.Check
                                 inline
-                                value={SmokerType.sigarette}
+                                value={SmokerType.SIGARETTE}
                                 label="Sigarette"
                                 name="smokerType"
                                 type='radio'
                                 onChange={handleChange}
-                                checked={values.smokerType == SmokerType.sigarette}
+                                checked={values.smokerType == SmokerType.SIGARETTE}
                             />
                             <Form.Check
                                 inline
-                                value={SmokerType.trinciato}
+                                value={SmokerType.TRINCIATO}
                                 label="Trinciato"
                                 name="smokerType"
                                 type='radio'
                                 onChange={handleChange}
-                                checked={values.smokerType == SmokerType.trinciato}
+                                checked={values.smokerType == SmokerType.TRINCIATO}
                             />
                         </Col>
                     </Row>
                     <br></br>
-                    {values.smokerType === SmokerType.sigarette
+                    {values.smokerType === SmokerType.SIGARETTE
                         ? (
                             <>
                                 <Row>

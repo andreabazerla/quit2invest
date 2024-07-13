@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import SmokerSummary from './(smoker)/SmokerCost';
 import SmokerSurvey, { SmokerType } from './(smoker)/SmokerSurvey';
-import InvestorSurvey from './(investor)/InvestorSurvey';
+import InvestorSurvey, { PacType } from './(investor)/InvestorSurvey';
 import InvestorSimulation from './(investor)/InvestorSimulation';
 
 const MultistepForm: React.FC = () => {
   const [step, setStep] = useState(1);
   const [formValues, setFormValues] = useState({
-    startDate: new Date().toLocaleDateString('en-US'),
+    startDate: new Date().toLocaleDateString('en-CA'),
     cigarettesPerDay: 12,
-    smokerType: SmokerType.sigarette,
+    smokerType: SmokerType.SIGARETTE,
     cigarettesPerPack: 20,
     packPrice: 5.00,
     filtersPackQuantity: 120,
@@ -18,19 +18,20 @@ const MultistepForm: React.FC = () => {
     papersPackPrice: 1.00,
     tobaccoPackDuration: 18,
     tobaccoPackPrice: 3.50,
-    monthlyRate: 0,
+    monthlyCost: 0,
     totalCost: 0,
+    pacType: PacType.CUSTOM,
     variableRate: 1.50,
     fixedRate: 0,
-    ter: 0.12,
-    annualReturn: 4.50
+    TER: 0.12,
+    annualReturn: 4.50,
   });
 
   useEffect(() => {
     const today = new Date();
     const lastYear = new Date(today.getFullYear() - 1, today.getMonth(), today.getDate());
 
-    const formattedDate = lastYear.toISOString().split('T')[0];
+    const formattedDate = lastYear.toLocaleDateString('en-CA').split('T')[0];
 
     setFormValues(prevState => ({
       ...prevState,

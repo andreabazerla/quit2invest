@@ -17,7 +17,7 @@ interface Step1Props {
         papersPackPrice: number,
         tobaccoPackDuration: number,
         tobaccoPackPrice: number,
-        monthlyRate: number,
+        monthlyCost: number,
         totalCost: number
     };
 }
@@ -30,7 +30,7 @@ const SmokerSummary: React.FC<Step1Props> = ({ prevStep, nextStep, values }) => 
     
     const cigarettesSmoked = (diffDays+1) * values.cigarettesPerDay; 
     let cost = 0;
-    if (values.smokerType === SmokerType.sigarette) {
+    if (values.smokerType === SmokerType.SIGARETTE) {
         const packsBought = Math.ceil(cigarettesSmoked / values.cigarettesPerPack);
         cost = Math.round(Math.max(packsBought * values.packPrice, values.packPrice) * 100) / 100;
     } else {
@@ -43,10 +43,10 @@ const SmokerSummary: React.FC<Step1Props> = ({ prevStep, nextStep, values }) => 
         cost = Math.round(Math.max(filtersPackCost + papersPackCost + tobaccoPackCost) * 100) / 100;
     }
     
-    const annualCost = cost / (diffDays/365);
+    const annualCost = Math.min(cost / (diffDays/365), cost);
     const monthlyCost = Math.min((cost / (diffDays/365))/12, cost);
 
-    values.monthlyRate = monthlyCost;
+    values.monthlyCost = monthlyCost;
     values.totalCost = cost;
 
     return (
@@ -58,7 +58,7 @@ const SmokerSummary: React.FC<Step1Props> = ({ prevStep, nextStep, values }) => 
                             <h4>Spese calcolate:</h4>
                             <br></br>
                             <p><b>Totale soldi spesi: €{numberWithCommas(cost.toFixed(2))}</b></p>
-                            <p>Soldi spesi all&apos;anno: €{numberWithCommas(Math.min((annualCost), cost).toFixed(2))}</p>
+                            <p>Soldi spesi all&apos;anno: €{numberWithCommas(annualCost.toFixed(2))}</p>
                             <p>Soldi spesi al mese: €{numberWithCommas(monthlyCost.toFixed(2))}</p>
                         </Col>
                     </Row>
