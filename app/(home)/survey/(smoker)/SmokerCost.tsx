@@ -58,7 +58,7 @@ const SmokerSummary: React.FC<Step1Props> = ({ prevStep, nextStep, values }) => 
                             <h4>Spese calcolate:</h4>
                             <br></br>
                             <p><b>Totale soldi spesi: €{numberWithCommas(cost.toFixed(2))}</b></p>
-                            <p>Soldi spesi all&apos;anno: €{numberWithCommas(annualCost.toFixed(2))}</p>
+                            <p>Soldi spesi all&apos;anno (365 giorni): €{numberWithCommas(annualCost.toFixed(2))}</p>
                             <p>Soldi spesi al mese: €{numberWithCommas(monthlyCost.toFixed(2))}</p>
                         </Col>
                     </Row>

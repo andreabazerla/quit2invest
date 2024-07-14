@@ -8,7 +8,8 @@ export default function Home() {
         <Col sm={8} md={8} lg={6} xl={4} xxl={2}>
             <Row>
                 <Col>
-                    <p>Fai un test per capire quanto avresti potuto guadagnare se al posto di fumare avessi investito nel tuo futuro</p>
+                    <p>Calcola quanto avresti potuto guadagnare se al posto di fumare avessi investito nel tuo futuro.</p>
+                    <p>Se non vuoi farlo per i tuoi polmoni, fallo per il tuo portafoglio!</p>
                 </Col>
             </Row>
             <br></br>
