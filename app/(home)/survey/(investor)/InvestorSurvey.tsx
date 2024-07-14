@@ -30,8 +30,8 @@ const InvestorSurvey: React.FC<Step1Props> = ({ prevStep, nextStep, handleChange
 
     return (
         <>
-            <Row>
-                <Col sm={8} md={8} lg={6} xl={4} xxl={3}>
+            <Row className='justify-content-center'>
+                <Col sm={8} md={8} lg={6} xl={4} xxl={2}>
                     <Row>
                         <Col>
                             <h4>Calcolatore PAC in ETF:</h4>
