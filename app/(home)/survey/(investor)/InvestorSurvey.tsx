@@ -141,6 +141,10 @@ const InvestorSurvey: React.FC<Step1Props> = ({ prevStep, nextStep, handleChange
                             </Button>
                         </Col>
                     </Row>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
                 </Col>
             </Row>
         </>
