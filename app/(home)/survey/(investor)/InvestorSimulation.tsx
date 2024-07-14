@@ -60,8 +60,8 @@ const InvestorSimulation: React.FC<Step1Props> = ({ prevStep, nextStep, values }
                             <p>Importo mensile investito: €{numberWithCommas(monthlyCost.toFixed(2))}</p>
                             <p>Importo totale investito: €{numberWithCommas(totalCost.toFixed(2))}</p>
                             <p>Capitale non investito (scarto): €{numberWithCommas((capital-values.totalCost).toFixed(2))}</p>
-                            <p className='text-green-600'>Incremento di valore: €{numberWithCommas((capital-totalCost+pacCost+fundCost).toFixed(2))}</p>
                             <p>Orizzonte investimento: {depositQuantity} mes{depositQuantity>1 ? <>i</> : <>e</>} (~{investmentYears} ann{investmentYears>1 ? <>i</> : <>o</>})</p>
+                            <p className='text-green-600'>Incremento di valore: €{numberWithCommas((capital-totalCost+pacCost+fundCost).toFixed(2))}</p>
                             <p className='text-red-600'>Costi del PAC: €{numberWithCommas(pacCost.toFixed(2))}</p>
                             <p className='text-red-600'>Costo del fondo: €{numberWithCommas(fundCost.toFixed(2))}</p>
                             <p><b>Risultato (al netto dei costi): €{numberWithCommas(capital.toFixed(2))}</b></p>
