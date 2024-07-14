@@ -85,6 +85,8 @@ const InvestorSimulation: React.FC<Step1Props> = ({ prevStep, nextStep, values }
     const investmentCapitalMax = Math.max(investmentCapital);
     const capitalMax = Math.max(capital);
     const yAxisMax = Math.max(investmentCapitalMax, capitalMax);
+    const newYAxisMax = (yAxisMax + yAxisMax/100*10);
+    const factor = Math.pow(10, Math.round(newYAxisMax).toString().length-2);
 
     return (
         <>
@@ -125,7 +127,7 @@ const InvestorSimulation: React.FC<Step1Props> = ({ prevStep, nextStep, values }
                             margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
                             <CartesianGrid strokeDasharray="3 3" />
                             <XAxis dataKey="name" />
-                            <YAxis domain={[0, Math.floor((yAxisMax + yAxisMax/100*10) / 1000) * 1000]} tickCount={10} />
+                            <YAxis domain={[0, Math.floor(newYAxisMax / factor) * factor]} tickCount={10} />
                             <Tooltip />
                             <Legend />
                             <Area name='Incremento di valore' dataKey="pv" stroke="#ff4500" fill="#ff4500" fillOpacity={1} />
