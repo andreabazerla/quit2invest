@@ -88,6 +88,10 @@ const InvestorSimulation: React.FC<Step1Props> = ({ prevStep, nextStep, values }
     const newYAxisMax = (yAxisMax + yAxisMax/100*10);
     const factor = Math.pow(10, Math.round(newYAxisMax).toString().length-2);
 
+    const incrementValue = capital-totalCost+pacCost+fundCost;
+    const incrementPercentage = incrementValue*100/totalCost;
+    const incrementFinalPercentage = (capital-totalCost)*100/totalCost;
+
     return (
         <>
             <Row>
@@ -100,10 +104,10 @@ const InvestorSimulation: React.FC<Step1Props> = ({ prevStep, nextStep, values }
                             <p>Importo totale investito: €{numberWithCommas(totalCost.toFixed(2))}</p>
                             <p>Capitale non investito (scarto): €{numberWithCommas((capital-values.totalCost).toFixed(2))}</p>
                             <p>Orizzonte investimento: {depositQuantity} mes{depositQuantity>1 ? <>i</> : <>e</>} (~{investmentYears} ann{investmentYears>1 ? <>i</> : <>o</>})</p>
-                            <p className='text-green-600'>Incremento di valore: €{numberWithCommas((capital-totalCost+pacCost+fundCost).toFixed(2))}</p>
+                            <p className='text-green-600'>Incremento di valore: €{numberWithCommas(incrementValue.toFixed(2))} ({incrementPercentage>0 ? <>+</> : <>-</>}{incrementPercentage.toFixed(2)}%)</p>
                             <p className='text-red-600'>Costi del PAC: €{numberWithCommas(pacCost.toFixed(2))}</p>
                             <p className='text-red-600'>Costo del fondo: €{numberWithCommas(fundCost.toFixed(2))}</p>
-                            <p><b>Risultato (al netto dei costi): €{numberWithCommas(capital.toFixed(2))}</b></p>
+                            <p><b>Risultato (al netto dei costi): €{numberWithCommas(capital.toFixed(2))} ({incrementFinalPercentage>0?<>+</>:<>-</>}{incrementFinalPercentage.toFixed(2)}%)</b></p>
                         </Col>
                     </Row>
                     <br />
@@ -130,8 +134,8 @@ const InvestorSimulation: React.FC<Step1Props> = ({ prevStep, nextStep, values }
                             <YAxis domain={[0, Math.floor(newYAxisMax / factor) * factor]} tickCount={10} />
                             <Tooltip />
                             <Legend />
-                            <Area name='Incremento di valore' dataKey="pv" stroke="#ff4500" fill="#ff4500" fillOpacity={1} />
-                            <Area name='Importo dell&apos;investimento' dataKey="uv" stroke="#6400ff" fill="#6400ff" fillOpacity={1} />
+                            <Area name='Capitale raggiunto' dataKey="pv" stroke="#ff4500" fill="#ff4500" fillOpacity={1} />
+                            <Area name='Importo investito' dataKey="uv" stroke="#6400ff" fill="#6400ff" fillOpacity={1} />
                         </AreaChart>
                     </ResponsiveContainer>
                 </Col>

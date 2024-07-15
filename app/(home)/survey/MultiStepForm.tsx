@@ -29,7 +29,7 @@ const MultistepForm: React.FC = () => {
 
   useEffect(() => {
     const today = new Date();
-    const lastYear = new Date(today.getFullYear() - 1, today.getMonth(), today.getDate());
+    const lastYear = new Date(today.getFullYear() - 10, today.getMonth(), today.getDate());
 
     const formattedDate = lastYear.toLocaleDateString('en-CA').split('T')[0];
 

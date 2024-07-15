@@ -41,90 +41,60 @@ const InvestorSurvey: React.FC<Step1Props> = ({ prevStep, nextStep, handleChange
                     </Row>
 
                     <Row>
-                        <Form.Label>Scegli l&apos;ETF del PAC:</Form.Label>
+                        <Form.Label>Crea l&apos;ETF del PAC:</Form.Label>
+                    </Row>
+
+                    <Row>
                         <Col>
-                            <Form.Check
-                                inline
-                                value={PacType.CUSTOM}
-                                label="Custom"
-                                name="pacType"
-                                type='radio'
-                                onChange={handleChange}
-                                checked={values.pacType == PacType.CUSTOM}
-                            />
-                           <Form.Check
-                                inline
-                                value={PacType.REAL}
-                                label="Reale"
-                                name="pacType"
-                                type='radio'
-                                onChange={handleChange}
-                                checked={values.pacType == PacType.REAL}
-                            />
+                            <Form.Label>Commissioni variabili:</Form.Label>
+                            <InputGroup>
+                                <Form.Control
+                                    type="number"
+                                    value={values.variableRate}
+                                    onChange={handleChange}
+                                    name="variableRate" />
+                                <InputGroup.Text>%</InputGroup.Text>
+                            </InputGroup>
                         </Col>
                     </Row>
                     <br></br>
-
-                    {values.pacType === PacType.CUSTOM
-                        ? (
-                            <>
-                                <Row>
-                                    <Col>
-                                        <Form.Label>Commissioni variabili:</Form.Label>
-                                        <InputGroup>
-                                            <Form.Control
-                                                type="number"
-                                                value={values.variableRate}
-                                                onChange={handleChange}
-                                                name="variableRate" />
-                                            <InputGroup.Text>%</InputGroup.Text>
-                                        </InputGroup>
-                                    </Col>
-                                </Row>
-                                <br></br>
-                                <Row>
-                                    <Col>
-                                        <Form.Label>Commissioni fisse:</Form.Label>
-                                        <InputGroup>
-                                            <InputGroup.Text>€</InputGroup.Text>
-                                            <Form.Control
-                                                type="number"
-                                                value={values.fixedRate}
-                                                onChange={handleChange}
-                                                name="fixedRate" />
-                                        </InputGroup>
-                                    </Col>
-                                </Row><br></br><Row>
-                                    <Col>
-                                        <Form.Label>Costi annuali fondo (TER):</Form.Label>
-                                        <InputGroup>
-                                            <Form.Control
-                                                type="number"
-                                                value={values.TER}
-                                                onChange={handleChange}
-                                                name="TER" />
-                                            <InputGroup.Text>%</InputGroup.Text>
-                                        </InputGroup>
-                                    </Col>
-                                </Row><br></br><Row>
-                                    <Col>
-                                        <Form.Label>Rendimento annuo:</Form.Label>
-                                        <InputGroup>
-                                            <Form.Control
-                                                type="number"
-                                                value={values.annualReturn}
-                                                onChange={handleChange}
-                                                name="annualReturn" />
-                                            <InputGroup.Text>%</InputGroup.Text>
-                                        </InputGroup>
-                                    </Col>
-                                </Row>
-                            </>
-                        )
-                        : (
-                            <></>
-                        )
-                    }
+                    <Row>
+                        <Col>
+                            <Form.Label>Commissioni fisse:</Form.Label>
+                            <InputGroup>
+                                <InputGroup.Text>€</InputGroup.Text>
+                                <Form.Control
+                                    type="number"
+                                    value={values.fixedRate}
+                                    onChange={handleChange}
+                                    name="fixedRate" />
+                            </InputGroup>
+                        </Col>
+                    </Row><br></br><Row>
+                        <Col>
+                            <Form.Label>Costi annuali fondo (TER):</Form.Label>
+                            <InputGroup>
+                                <Form.Control
+                                    type="number"
+                                    value={values.TER}
+                                    onChange={handleChange}
+                                    name="TER" />
+                                <InputGroup.Text>%</InputGroup.Text>
+                            </InputGroup>
+                        </Col>
+                    </Row><br></br><Row>
+                        <Col>
+                            <Form.Label>Rendimento annuo:</Form.Label>
+                            <InputGroup>
+                                <Form.Control
+                                    type="number"
+                                    value={values.annualReturn}
+                                    onChange={handleChange}
+                                    name="annualReturn" />
+                                <InputGroup.Text>%</InputGroup.Text>
+                            </InputGroup>
+                        </Col>
+                    </Row>
 
                     <br></br>
                     <br></br>
