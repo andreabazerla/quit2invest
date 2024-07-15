@@ -118,9 +118,6 @@ const InvestorSimulation: React.FC<Step1Props> = ({ prevStep, nextStep, values }
                             </Button>
                         </Col>
                         <Col className='text-center'>
-                            <Button variant="primary" onClick={nextStep}>
-                                Investi
-                            </Button>
                         </Col>
                     </Row>
                 </Col>
