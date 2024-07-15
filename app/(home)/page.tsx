@@ -5,11 +5,11 @@ export default function Home() {
   return (
     <>
       <Row className='justify-content-center'>
-        <Col sm={8} md={8} lg={6} xl={4} xxl={2}>
+        <Col sm={8} md={8} lg={6} xl={4} xxl={3} className="mx-auto">
             <Row>
                 <Col>
                     <p>Calcola quanto avresti potuto guadagnare se al posto di fumare avessi investito nel tuo futuro.</p>
-                    <p>Se non vuoi farlo per i tuoi polmoni, fallo per il tuo portafoglio!</p>
+                    <p>Se non vuoi farlo per i tuoi polmoni, fallo per il tuo portafoglio.</p>
                 </Col>
             </Row>
             <br></br>

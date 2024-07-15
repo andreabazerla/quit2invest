@@ -52,7 +52,7 @@ const SmokerSummary: React.FC<Step1Props> = ({ prevStep, nextStep, values }) => 
     return (
         <>
             <Row className='justify-content-center'>
-                <Col sm={8} md={8} lg={6} xl={4} xxl={2}>
+                <Col sm={12} md={10} lg={8} xl={6} xxl={3} className='mx-auto'>
                     <Row>
                         <Col>
                             <h4>Spese calcolate:</h4>

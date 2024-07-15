@@ -42,21 +42,23 @@ const InvestorSimulation: React.FC<Step1Props> = ({ prevStep, nextStep, values }
     const monthlyCost = parseFloat(values.monthlyCost.toFixed(2));
     const totalCost = monthlyCost*depositQuantity;
 
-    const annualIncome = (annualReturn - TER) / 100;
-    const menthlyReturn = annualIncome / 12;
+    //const annualIncome = annualReturn / 100 - TER / 100;
+    //const menthlyReturn = (annualReturn / 100 - TER / 100) / 12;
 
     let capital = 0;
     let fundCost = 0;
     let capitalHistory = [];
     let investmentHistory = [];
     let investmentCapital = 0;
+    capitalHistory.push(0);
+    investmentHistory.push(0);
     for (let i = 0; i < depositQuantity; i++) {
         capital += monthlyCost - fixedRate; 
         capital -= monthlyCost * variableRate / 100;
-        let currentCapital = capital;
-        currentCapital *= (1 + (annualReturn / 100) / 12);
-        fundCost += currentCapital * (TER / 100) / 12;
-        capital *= (1 + menthlyReturn);
+        capital *= (1 + (annualReturn / 100 - TER / 100) / 12);
+
+        fundCost += capital * (TER / 100) / 12;
+        
         capitalHistory.push((Math.round(capital * 100) / 100).toFixed(2));
         investmentCapital += monthlyCost;
         investmentHistory.push((Math.round(investmentCapital * 100) / 100).toFixed(2));
@@ -95,14 +97,14 @@ const InvestorSimulation: React.FC<Step1Props> = ({ prevStep, nextStep, values }
     return (
         <>
             <Row>
-                <Col sm={{span:8, offset:2}} lg={{span:6, offset:3}} xl={{span:4, offset:4}} xxl={{span: 2, offset:5}}>
+                <Col sm={12} md={10} lg={8} xl={6} xxl={3} className='mx-auto'>
                     <Row>
                         <Col>
                             <h4>Risultato PAC in ETF:</h4>
                             <br></br>
                             <p>Importo mensile investito: €{numberWithCommas(monthlyCost.toFixed(2))}</p>
                             <p>Importo totale investito: €{numberWithCommas(totalCost.toFixed(2))}</p>
-                            <p>Capitale non investito (scarto): €{numberWithCommas((capital-values.totalCost).toFixed(2))}</p>
+                            <p>Capitale non investito (scarto): €{numberWithCommas((values.totalCost-totalCost).toFixed(2))}</p>
                             <p>Orizzonte investimento: {depositQuantity} mes{depositQuantity>1 ? <>i</> : <>e</>} (~{investmentYears} ann{investmentYears>1 ? <>i</> : <>o</>})</p>
                             <p className='text-green-600'>Incremento di valore: €{numberWithCommas(incrementValue.toFixed(2))} ({incrementPercentage>0 ? <>+</> : <>-</>}{incrementPercentage.toFixed(2)}%)</p>
                             <p className='text-red-600'>Costi del PAC: €{numberWithCommas(pacCost.toFixed(2))}</p>
@@ -112,23 +114,25 @@ const InvestorSimulation: React.FC<Step1Props> = ({ prevStep, nextStep, values }
                     </Row>
                     <br />
                     <Row>
-                        <Col className='text-center'>
+                        <Col className='text-center' xs={12}>
                             <Button variant="secondary" onClick={prevStep}>
                                 Indietro
                             </Button>
                         </Col>
-                        <Col className='text-center'>
-                        </Col>
                     </Row>
                 </Col>
-                <Col sm={{span:12, offset:0}} md={{span:10, offset:1}} lg={{span:8, offset:2}} xl={{span:6, offset:3}} xxl={{span:4, offset:4}} style={{margin:'25px 0 50px 0'}}>
+            </Row>
+            <br></br>
+            <br></br>
+            <Row>
+                <Col sm={12} md={10} lg={8} xl={6} xxl={4} className='mx-auto'>
                     <ResponsiveContainer width="100%" height={500}>
                         <AreaChart
                             data={data}
                             margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
                             <CartesianGrid strokeDasharray="3 3" />
                             <XAxis dataKey="name" />
-                            <YAxis domain={[0, Math.floor(newYAxisMax / factor) * factor]} tickCount={10} />
+                            <YAxis domain={[0, Math.floor(newYAxisMax / factor) * factor]} tickCount={5} />
                             <Tooltip />
                             <Legend />
                             <Area name='Capitale raggiunto' dataKey="pv" stroke="#ff4500" fill="#ff4500" fillOpacity={1} />
@@ -137,6 +141,9 @@ const InvestorSimulation: React.FC<Step1Props> = ({ prevStep, nextStep, values }
                     </ResponsiveContainer>
                 </Col>
             </Row>
+            <br></br>
+            <br></br>
+            <br></br>
         </>
     )
 }
