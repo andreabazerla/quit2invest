@@ -39,7 +39,8 @@ const InvestorSimulation: React.FC<Step1Props> = ({ prevStep, nextStep, values }
     const fixedRate = values.fixedRate;
     const TER = values.TER; 
     const variableRate = values.variableRate;
-    const monthlyCost = parseFloat(values.monthlyCost.toFixed(2));
+    let monthlyCost = parseFloat(values.monthlyCost.toFixed(2));
+    monthlyCost = 100;
     const totalCost = monthlyCost*depositQuantity;
 
     const annualIncome = (annualReturn - TER) / 100;
@@ -52,10 +53,14 @@ const InvestorSimulation: React.FC<Step1Props> = ({ prevStep, nextStep, values }
     let investmentCapital = 0;
     capitalHistory.push(0);
     investmentHistory.push(0);
+    let capital2 = capital;
     for (let i = 0; i < depositQuantity; i++) {
         capital += monthlyCost - fixedRate; 
         capital -= monthlyCost * variableRate / 100;
+        capital2 = capital * (1 + (annualReturn / 100) / 12)
         capital *= 1 + menthlyReturn;
+        
+        fundCost += capital2 * (TER / 100) / 12;
 
         capitalHistory.push((Math.round(capital * 100) / 100).toFixed(2));
         investmentCapital += monthlyCost;
