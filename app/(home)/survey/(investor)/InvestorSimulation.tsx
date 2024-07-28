@@ -40,7 +40,6 @@ const InvestorSimulation: React.FC<Step1Props> = ({ prevStep, nextStep, values }
     const TER = values.TER; 
     const variableRate = values.variableRate;
     let monthlyCost = parseFloat(values.monthlyCost.toFixed(2));
-    monthlyCost = 100;
     const totalCost = monthlyCost*depositQuantity;
 
     const annualIncome = (annualReturn - TER) / 100;
